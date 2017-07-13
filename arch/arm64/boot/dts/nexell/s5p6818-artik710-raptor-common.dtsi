@@ -140,11 +140,6 @@
 			};
 		};
 
-		dwc2otg@c0040000 {
-			gpios = <&gpio_a 15 0>;
-			status = "okay";
-		};
-
 		gmac0:ethernet@c0060000 {
 			pinctrl-names = "default";
 			pinctrl-0 = <&gmac_pins>;
