@@ -97,10 +97,6 @@
 	};
 };
 
-&i2c_gpio5 {
-	status = "disabled";
-};
-
 &i2c_2 {
 	#address-cells = <1>;
 	#size-cells = <0>;
