@@ -135,3 +135,7 @@ define archhelp
   echo  '                  (distribution) /sbin/installkernel or'
   echo  '                  install to $$(INSTALL_PATH) and run lilo'
 endef
+
+# Rules only for ATK710 developers
+%.grep:
+	grep "$*" arch/arm64/boot/dts/nexell/s5p6818-artik710-raptor-*.dts*

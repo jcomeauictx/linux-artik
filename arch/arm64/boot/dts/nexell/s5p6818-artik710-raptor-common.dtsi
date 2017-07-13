@@ -44,7 +44,6 @@
 		i2c7 = &i2c_gpio7;
 		i2c9 = &i2c_gpio9;
 		i2c10 = &i2c_gpio10;
-		i2c11 = &i2c_gpio11;
 	};
 
 	nx-v4l2 {
@@ -120,17 +119,6 @@
 
 		nexell_usbphy: nexell-usbphy@c0012000 {
 			status = "okay";
-		};
-
-		ehci@c0030000 {
-			samsung,vbus-gpio = <&gpio_a 16 0>;
-			status = "okay";
-			port@0 {
-				status = "okay";
-			};
-			port@1 {
-				status = "okay";
-			};
 		};
 
 		ohci@c0020000 {
@@ -464,18 +452,6 @@
 		};
 	};
 
-	i2c_gpio11: i2c@11 {
-		compatible = "i2c-gpio";
-		gpios = <&gpio_b 18 0	/* sda */
-			&gpio_b 11 0	/* scl */
-			>;
-
-		i2c-gpio,delay-us = <1>;
-		#address-cells = <1>;
-		#size-cells = <0>;
-		status = "okay";
-	};
-
 	regulators {
 		VCC_DCDC0:
 			dcdc1	{ PMIC_PDATA_INIT( 0,
@@ -708,13 +684,6 @@
 		vs_end_offset = <0>;
 		ev_end_offset = <0>;
 	};
-};
-
-&dp_drm_hdmi {
-	ddc-i2c-bus = <&i2c_gpio7>;
-	enable-gpios = <&gpio_a 21 0>;
-	status = "ok";
-	q_range = <0>;
 };
 
 &dp_drm_lvds {
