@@ -101,6 +101,20 @@ dtbs: prepare scripts
 dtbs_install:
 	$(Q)$(MAKE) $(dtbinst)=$(boot)/dts
 
+special_dtb_install: dtbs
+	@echo If this fails, make sure you have in your ~/.ssh/config:
+	@echo Host atk710
+	@echo User root
+	@echo StrictHostKeyChecking no
+	@echo UserKnownHostsFile /dev/null
+	@echo
+	@echo And of course, you need an entry in /etc/hosts mapping
+	@echo atk710 to an IP number, presumably on your local network.
+	ssh root@atk710 mount -oremount,rw /boot
+	scp $(boot)/dts/nexell/s5p6818-artik710-raptor-rev03.dtb \
+	 root@atk710:/boot/s5p6818-artik710-raptor-rev03-freed-gpios.dtb
+	ssh root@atk710 mount -oremount,ro /boot
+
 PHONY += vdso_install
 vdso_install:
 	$(Q)$(MAKE) $(build)=arch/arm64/kernel/vdso $@
