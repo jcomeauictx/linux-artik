@@ -2,6 +2,8 @@
  * Copyright (C) 2016  Nexell Co., Ltd.
  * Author: Youngbok, Park <ybpark@nexell.co.kr>
  *
+ * Modified by John Comeau <jc@unternet.net> to free up some GPIOs
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2

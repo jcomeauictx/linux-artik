@@ -101,7 +101,7 @@ dtbs: prepare scripts
 dtbs_install:
 	$(Q)$(MAKE) $(dtbinst)=$(boot)/dts
 
-special_dtb_install: dtbs
+special_dtb_install: dtbs  # jc@unternet.net, for monkeypatching dev kit
 	@echo If this fails, make sure you have in your ~/.ssh/config:
 	@echo Host atk710
 	@echo User root
@@ -136,6 +136,6 @@ define archhelp
   echo  '                  install to $$(INSTALL_PATH) and run lilo'
 endef
 
-# Rules only for ATK710 developers
+# Rules only for ATK710 developers (jc@unternet.net)
 %.grep:
 	grep "$*" arch/arm64/boot/dts/nexell/s5p6818-artik710-raptor-*.dts*
