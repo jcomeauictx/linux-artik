@@ -2,8 +2,6 @@
  * Copyright (C) 2016  Nexell Co., Ltd.
  * Author: Youngbok, Park <ybpark@nexell.co.kr>
  *
- * Modified by John Comeau <jc@unternet.net> to free up some GPIOs
- *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
@@ -41,8 +39,14 @@
 
 	aliases {
 		i2c3 = &i2c_gpio3;
+		i2c4 = &i2c_gpio4;
+		i2c5 = &i2c_gpio5;
+		i2c6 = &i2c_gpio6;
 		i2c7 = &i2c_gpio7;
+		i2c8 = &i2c_gpio8;
+		i2c9 = &i2c_gpio9;
 		i2c10 = &i2c_gpio10;
+		i2c11 = &i2c_gpio11;
 	};
 
 	nx-v4l2 {
@@ -120,11 +124,27 @@
 			status = "okay";
 		};
 
+		ehci@c0030000 {
+			samsung,vbus-gpio = <&gpio_a 16 0>;
+			status = "okay";
+			port@0 {
+				status = "okay";
+			};
+			port@1 {
+				status = "okay";
+			};
+		};
+
 		ohci@c0020000 {
 			status = "okay";
 			port@0 {
 				status = "okay";
 			};
+		};
+
+		dwc2otg@c0040000 {
+			gpios = <&gpio_a 15 0>;
+			status = "okay";
 		};
 
 		gmac0:ethernet@c0060000 {
@@ -306,6 +326,22 @@
 		};
 	};
 
+	i2c_gpio6:i2c@6 {
+		compatible = "i2c-gpio";
+		gpios = <&gpio_a 5 0 /* sda */
+			&gpio_a 4 0 /* scl */
+			>;
+		i2c-gpio,delay-us = <10>;
+		#address-cells = <1>;
+		#size-cells = <0>;
+
+		alc5658: alc5658@1a {
+			#sound-dai-cells = <0>;
+			compatible = "realtek,rt5658";
+			reg = <0x1a>;
+		};
+	};
+
 	i2c_gpio7:i2c@7 {
 		compatible = "i2c-gpio";
 		gpios = <&gpio_a 24 0 /* sda */
@@ -330,6 +366,17 @@
 		    "IN2P", "In Jack";
 		status = "okay";
 
+		simple-audio-card,dai-link@0 {
+		    format = "i2s";
+		    cpu {
+			sound-dai = <&i2s_0 0>;
+		    };
+
+		    codec {
+			sound-dai = <&alc5658>;
+		    };
+		};
+
 		simple-audio-card,dai-link@1 {
 		    cpu {
 			sound-dai = <&spdif_tx 0>;
@@ -338,6 +385,47 @@
 		    codec {
 			sound-dai = <&spdif_out>;
 		    };
+		};
+	};
+
+	i2c_gpio4: i2c@4 {
+		compatible = "i2c-gpio";
+		gpios = <&gpio_b 30 0 /* sda */
+			&gpio_b 31 0 /* scl */
+			>;
+		i2c-gpio,delay-us = <1>;    /* ~100 kHz */
+		#address-cells = <1>;
+		#size-cells = <0>;
+
+		usb3503: usb3503@08 {
+			compatible = "smsc,usb3503";
+			reg = <0x08>;
+			intn-gpios = <&gpio_b 23 0>;
+			connect-gpios = <&gpio_a 18 0>;
+			reset-gpios = <&gpio_a 22 0>;
+			initial-mode = <1>;
+		};
+	};
+
+	i2c_gpio5: i2c@5 {
+		compatible = "i2c-gpio";
+		gpios = <&gpio_d 31 0	/* sda */
+			&gpio_e 3 0	/* scl */
+			>;
+		#address-cells = <1>;
+		#size-cells = <0>;
+		i2c-gpio,delay-us = <100>;
+
+		rtc@68 {
+			compatible = "maxim,ds1337";
+			reg = <0x68>;
+			interrupt-parent = <&alive_0>;
+			interrupts = <0x2 IRQ_TYPE_EDGE_FALLING>;
+			/* If it's first boot, reset to 4/29/2016(Fri) UTC */
+			init_time,year = <116>;
+			init_time,mon = <3>;
+			init_time,mday = <29>;
+			init_time,wday = <5>;
 		};
 	};
 
@@ -372,6 +460,57 @@
 		status = "disabled";
 	};
 
+	i2c_gpio8: i2c@8 {
+		compatible = "i2c-gpio";
+		gpios = <&gpio_a 13 0	/* sda */
+			&gpio_a 9 0		/* scl */
+			>;
+		i2c-gpio,delay-us = <1>;	/* ~100kHz */
+		#address-cells = <1>;
+		#size-cells = <0>;
+		status = "okay";
+
+		cw2015@62 {
+			compatible = "cw201x";
+			reg = <0x62>;
+
+			bat_config_info = <0x15 0x4C 0x78 0x48 0x25
+				0x16 0x45 0x60 0x67 0x5D
+                0x56 0x4C 0x58 0x58 0x53
+				0x57 0x59 0x5C 0x5E 0x65
+                0x57 0x6C 0x78 0x75 0x85
+				0x91 0x07 0xAE 0x74 0xA4
+                0x96 0xA3 0xC1 0xC2 0xD2
+				0xBF 0x40 0x1F 0x98 0x19
+                0x05 0x38 0x48 0x79 0x8D
+				0x92 0x92 0x23 0x73 0x80
+                0x94 0xB0 0x37 0xC1 0x91
+				0xCB 0x2F 0x7D 0x72 0xA5
+				0xB5 0xC1 0x15 0x09>;
+
+			is_dc_charge = <1>;
+			is_usb_charge = <0>;
+		};
+
+	};
+
+	i2c_gpio9: i2c@9 {
+		compatible = "i2c-gpio";
+		gpios = <&gpio_a 19 0	/* sda */
+			&gpio_a 20 0	/* scl */
+			>;
+		i2c-gpio,delay-us = <1>;	/* ~100kHz */
+		#address-cells = <1>;
+		#size-cells = <0>;
+		status = "okay";
+
+		bq24296_charger@6b {
+			compatible = "ti,bq24296";
+			reg = <0x6b>;
+			ti,chg_current = <1000 1500 2000>;
+		};
+	};
+
 	i2c_gpio10: i2c@10 {
 		compatible = "i2c-gpio";
 		gpios = <&gpio_c 16 0	/* sda */
@@ -391,6 +530,18 @@
 			pinctrl-names = "default";
 			pinctrl-0 = <&pmic_irq>;
 		};
+	};
+
+	i2c_gpio11: i2c@11 {
+		compatible = "i2c-gpio";
+		gpios = <&gpio_b 18 0	/* sda */
+			&gpio_b 11 0	/* scl */
+			>;
+
+		i2c-gpio,delay-us = <1>;
+		#address-cells = <1>;
+		#size-cells = <0>;
+		status = "okay";
 	};
 
 	regulators {
@@ -625,6 +776,13 @@
 		vs_end_offset = <0>;
 		ev_end_offset = <0>;
 	};
+};
+
+&dp_drm_hdmi {
+	ddc-i2c-bus = <&i2c_gpio7>;
+	enable-gpios = <&gpio_a 21 0>;
+	status = "ok";
+	q_range = <0>;
 };
 
 &dp_drm_lvds {

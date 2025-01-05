@@ -2,8 +2,6 @@
  * Copyright (C) 2016  Nexell Co., Ltd.
  * Author: Youngbok, Park <ybpark@nexell.co.kr>
  *
- * Modified by John Comeau <jc@unternet.net> to free up some GPIOs
- *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
@@ -108,7 +106,24 @@
 	};
 };
 
+&i2c_gpio5 {
+	rtc@68 {
+		compatible = "ti,bq32000";
+		trickle-resistor-ohms = <1120>;
+		reg = <0x68>;
+		/* If it's first boot, reset to 4/29/2016(Fri) UTC */
+		init_time,year = <116>;
+		init_time,mon = <3>;
+		init_time,mday = <29>;
+		init_time,wday = <5>;
+	};
+};
+
 &i2c_gpio10 {
+	status = "disabled";
+};
+
+&i2c_gpio11 {
 	status = "disabled";
 };
 
