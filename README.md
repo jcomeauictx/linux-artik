@@ -41,6 +41,10 @@ You can the path permernently through adding it into ~/.bashrc
 To generate modules.img which contains kernel modules, you can use the make_ext4fs.
 ```
 sudo apt-get install android-tools-fsutils
+
+if that fails for lack of installation candidate (on newer systems):
+
+sudo apt-get install android-sdk-libsparse-utils
 ```
 
 ### 2.2 Build the kernel
