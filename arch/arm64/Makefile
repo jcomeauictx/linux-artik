@@ -43,7 +43,8 @@ endif
 CHECKFLAGS	+= -D__aarch64__
 
 ifeq ($(CONFIG_ARM64_ERRATUM_843419), y)
-KBUILD_CFLAGS_MODULE	+= -mcmodel=large
+# http://lists.infradead.org/pipermail/kexec/2018-January/019722.html
+KBUILD_CFLAGS_MODULE	+= -mcmodel=large -fno-PIC
 endif
 
 # Default value
