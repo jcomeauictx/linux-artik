@@ -10,6 +10,12 @@ artik10(artik1020), artik710 and artik530. The base kernel version of artik5
 and artik10 is linux-3.10.93 and based on Samsung Exynos kernel.
 The artik710 and artik530 kernel is based on is based on linux-4.4.19.
 
+*PLEASE NOTE* as of 2025 (and probably a few years before), a lot of this
+information is out of date on modern operating systems such as Debian stable
+(bookworm). See `GNUmakefile` in the project root for the more up to date
+instructions for building for artik710. The same modifications may also be
+of use for building for artik5 and artik10, tweaked accordingly.
+
 ---
 ## 2. Build guide
 ### 2.1 Install cross compiler

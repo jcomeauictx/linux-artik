@@ -7,8 +7,13 @@ atk710: atk710_kernel atk710_modules
 	@echo 'Then, with the dev board running: `make atk710_install`' >&2
 atk710_kernel:
 	sudo apt-get install gcc-aarch64-linux-gnu
-	sudo apt-get install android-tools-fsutils || \
-	 sudo apt-get install android-sdk-libsparse-utils
+	# the following was for the obsolete `make_ext4fs`, then for
+	# `mke2fs` from the Android repository. But the `e2fsprogs` version
+	# of `mke2fs` is better because it has a `mkfs.ext4` symlink that
+	# obviates the need for an option specifying the fstype, so we don't
+	# need either of these.
+	#sudo apt-get install android-tools-fsutils || \
+	# sudo apt-get install android-sdk-libsparse-utils
 	$(MAKE) ARCH=arm64 artik710_raptor_defconfig
 	$(MAKE) ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- Image -j4
 	$(MAKE) ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- dtbs
