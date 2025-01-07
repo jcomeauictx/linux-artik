@@ -179,3 +179,11 @@ dd if=/root/modules.img of=/dev/mmcblk0p2
 sync
 reboot
 ```
+
+## Samsung documentation for Artik7
+* [Software user guide](https://ipfs.io/ipfs/QmZM8HojWQEWKiKBMkRrcW48acJX2sS9Yvy4AZEwVsCET6)
+* [Hardware user guide](https://ipfs.io/ipfs/QmNQiVoVHs8R1QQD85tvbg25bUpEW1rReFkrL5Sb76mY3k)
+* [Modules datasheet](https://ipfs.io/ipfs/QmTjV3hdPNEqzwt3GdM4rasCPTSNntsNee9FM6wrWWiDBA) (pdf)
+
+## Developer notes for Artik7
+* [Getting started](https://medium.com/hi-z-labs/embedding-artik-710-module-c3fe55200330)
