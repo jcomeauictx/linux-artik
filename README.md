@@ -192,4 +192,6 @@ reboot
   the white start button. It came shipped in the "Zigbee On" setting, but moving
   it to "Always On" took care of this, and the board attempts to boot as soon as
   power is applied (when the slide switch is in the "On" position).
+  Unfortunately, however, if the power comes up to 5VDC too slowly, as on my
+  solar panel setup, it fails to boot.
 * [Aaron Heise's ARTIK710 Images article](https://medium.com/hi-z-labs/custom-artik-710-images-7c78039473bb), [archived](https://ipfs.io/ipfs/QmVE3xespNrHMAxjqsUUFvDnqXkGbwG7AznfrLpyurkB3T)
