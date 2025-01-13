@@ -187,5 +187,8 @@ reboot
 * [Modules datasheet](https://ipfs.io/ipfs/QmTjV3hdPNEqzwt3GdM4rasCPTSNntsNee9FM6wrWWiDBA) (pdf)
 
 ## Developer notes for Artik7
-* [Getting started](https://medium.com/hi-z-labs/embedding-artik-710-module-c3fe55200330)
+* [Getting started](https://medium.com/hi-z-labs/embedding-artik-710-module-c3fe55200330) As for the "pulling PWR_KEY low" mentioned, there's a red jumper near
+the white start button. It came shipped in the "Zigbee On" setting, but moving
+it to "Always On" took care of this, and the board attempts to boot as soon as
+power is applied (when the slide switch is in the "On" position).
 * [Custom images](https://medium.com/hi-z-labs/custom-artik-710-images-7c78039473bb)
