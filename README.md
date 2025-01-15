@@ -182,7 +182,8 @@ reboot
 
 ## Samsung documentation for Artik7
 * [Software user guide](https://ipfs.io/ipfs/QmZM8HojWQEWKiKBMkRrcW48acJX2sS9Yvy4AZEwVsCET6) (pdf); of particular interest is page 33, which describes making,
-  and booting from, an SD card.
+  and booting from, an SD card; and pages 10 and 11, for setting up a wireless
+  Internet connection.
 * [Hardware user guide](https://ipfs.io/ipfs/QmNQiVoVHs8R1QQD85tvbg25bUpEW1rReFkrL5Sb76mY3k) (pdf)
 * [Modules datasheet](https://ipfs.io/ipfs/QmTjV3hdPNEqzwt3GdM4rasCPTSNntsNee9FM6wrWWiDBA) (pdf)
 
